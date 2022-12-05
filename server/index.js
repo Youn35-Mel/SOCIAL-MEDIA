@@ -1,1 +1,20 @@
-console.log("test");
+import express from "express";
+const app = express();
+import userRoutes from "./routes/users.js";
+import postsRoutes from "./routes/posts.js";
+import commentRoutes from "./routes/comments.js";
+import likeRoutes from "./routes/likes.js";
+import authRoutes from "./routes/auth.js";
+
+//middlewares
+app.use(express.json());
+
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postsRoutes);
+app.use("/api/comments", commentRoutes);
+app.use("/api/likes", likeRoutes);
+app.use("/api/auth", authRoutes);
+
+app.listen(5000, () => {
+  console.log("server listening 5000");
+});
