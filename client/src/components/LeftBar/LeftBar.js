@@ -13,7 +13,7 @@ import Tutorials from "../../assets/11.png";
 import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 import "./LeftBar.scss";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 
 const LeftBar = () => {
   const { currentUser } = useContext(AuthContext);

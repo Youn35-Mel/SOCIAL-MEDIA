@@ -19,7 +19,7 @@ import {
 import { element } from "prop-types";
 import { useContext } from "react";
 import { DarkModeContext } from "./components/context/DarkModeContext";
-import { AuthContext } from "./components/context/authContext";
+import { AuthContext } from "./components/context/AuthContext";
 
 function App() {
   // const { currentUser } = false;
@@ -70,7 +70,7 @@ function App() {
       ],
     },
     {
-      path: "/Register",
+      path: "/register",
       element: <Register />,
     },
     {

@@ -10,7 +10,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../context/DarkModeContext";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
