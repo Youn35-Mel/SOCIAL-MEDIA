@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
-
+  console.log(post);
   //TEMPORARY
   const liked = false;
 
