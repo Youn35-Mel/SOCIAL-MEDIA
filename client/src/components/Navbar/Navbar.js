@@ -18,6 +18,7 @@ const Navbar = () => {
           <span>lamasocial</span>
         </Link>
         <HomeOutlinedIcon />
+        <DarkModeOutlinedIcon />
         {/* {darkMode ? (
         <WbSunnyOutlinedIcon onClick={toggle} />
       ) : (

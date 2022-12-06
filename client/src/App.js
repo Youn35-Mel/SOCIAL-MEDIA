@@ -1,4 +1,5 @@
 import "./App.css";
+import "./style.scss";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Navbar from "./components/Navbar/Navbar";
@@ -22,11 +23,13 @@ function App() {
 
   const Layout = () => {
     return (
-      <div>
+      <div className="theme-dark">
         <Navbar />
         <div style={{ display: "flex" }}>
           <LeftBar />
-          <Outlet />
+          <div style={{ flex: 6 }}>
+            <Outlet />
+          </div>
           <RightBar />
         </div>
       </div>
