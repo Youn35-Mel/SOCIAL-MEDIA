@@ -17,6 +17,7 @@ $themes: (
   ),
 );
 
+// function to change theme dark
 @mixin themify($themes) {
   @each $theme, $map in $themes {
     .theme-#{$theme} & {

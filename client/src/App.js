@@ -17,13 +17,19 @@ import {
   Navigate,
 } from "react-router-dom";
 import { element } from "prop-types";
+import { useContext } from "react";
+import { DarkModeContext } from "./components/context/DarkModeContext";
+import { AuthContext } from "./components/context/authContext";
 
 function App() {
-  const currentUser = false;
+  // const { currentUser } = false;
+  const { currentUser } = useContext(AuthContext);
+
+  const { darkMode } = useContext(DarkModeContext);
 
   const Layout = () => {
     return (
-      <div className="theme-dark">
+      <div className={`theme-${darkMode ? "dark" : "light"}`}>
         <Navbar />
         <div style={{ display: "flex" }}>
           <LeftBar />
@@ -48,9 +54,9 @@ function App() {
     {
       path: "/",
       element: (
-        // <ProtectedRoute>
-        <Layout />
-        // </ProtectedRoute>
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
       ),
       children: [
         {
