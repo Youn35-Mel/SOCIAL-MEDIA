@@ -8,17 +8,13 @@ import { Link } from "react-router-dom";
 import Comments from "../Comments/Comments";
 import { useContext, useState } from "react";
 import moment from "moment";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../context/AuthContext";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
-  console.log(post);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -31,6 +27,39 @@ const Post = ({ post }) => {
   // console.log(data);
   //TEMPORARY
   // const liked = false;
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (liked) => {
+      if (liked) return makeRequest.delete("/likes?postId=" + post.id);
+      return makeRequest.post("/likes", { postId: post.id });
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["likes"]);
+      },
+    }
+  );
+  const deleteMutation = useMutation(
+    (postId) => {
+      return makeRequest.delete("/posts/" + postId);
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["posts"]);
+      },
+    }
+  );
+
+  const handleLike = () => {
+    mutation.mutate(data.includes(currentUser.id));
+  };
+
+  const handleDelete = () => {
+    deleteMutation.mutate(post.id);
+  };
 
   return (
     <div className="post">
@@ -60,12 +89,10 @@ const Post = ({ post }) => {
             ) : data.includes(currentUser.id) ? (
               <FavoriteOutlinedIcon
                 style={{ color: "red" }}
-                // onClick={handleLike}
+                onClick={handleLike}
               />
             ) : (
-              <FavoriteBorderOutlinedIcon
-              //onClick={handleLike}
-              />
+              <FavoriteBorderOutlinedIcon onClick={handleLike} />
             )}
             {data?.length} Likes
           </div>
